@@ -1,0 +1,13 @@
+document.documentElement.style.setProperty('background','#000','important');
+document.body.style.setProperty('background','#000','important');
+document.body.style.setProperty('color','#e8e8e8','important');
+document.querySelectorAll('*').forEach(el=>{
+  el.style.setProperty('background-color','transparent','');
+});
+document.querySelectorAll('header,main,article,footer').forEach(el=>{
+  el.style.setProperty('background','#000','important');
+  el.style.setProperty('color','#e8e8e8','important');
+});
+document.querySelectorAll('a').forEach(el=>{
+  el.style.setProperty('color','#00ff88','important');
+});
