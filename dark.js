@@ -1,43 +1,25 @@
-function injectStyles() {
-  let style = document.getElementById("custom-dark");
-  if (style) return;
+function forceDark() {
+  // Base page
+  document.documentElement.style.setProperty("background", "#000", "important");
+  document.body.style.setProperty("background", "#000", "important");
+  document.body.style.setProperty("color", "#e8e8e8", "important");
 
-  style = document.createElement("style");
-  style.id = "custom-dark";
+  // Target visible content containers specifically
+  document.querySelectorAll("main, article, section, div").forEach(el => {
+    el.style.setProperty("background", "rgba(20,20,20,0.7)", "important");
+    el.style.setProperty("color", "#e8e8e8", "important");
+  });
 
-  style.innerHTML = `
-    html, body {
-      background: #000 !important;
-      color: #e8e8e8 !important;
-    }
+  // Fix text elements
+  document.querySelectorAll("p, h1, h2, h3, span, li").forEach(el => {
+    el.style.setProperty("color", "#e8e8e8", "important");
+  });
 
-    * {
-      background-color: transparent !important;
-      color: #e8e8e8 !important;
-      border-color: #222 !important;
-    }
-
-    a {
-      color: #00ff88 !important;
-    }
-
-    a:hover {
-      text-shadow: 0 0 6px #00ff88;
-    }
-
-    article, main, section, div {
-      background: rgba(20,20,20,0.6) !important;
-      backdrop-filter: blur(8px);
-      border-radius: 10px;
-    }
-  `;
-
-  document.head.appendChild(style);
+  // Links
+  document.querySelectorAll("a").forEach(a => {
+    a.style.setProperty("color", "#00ff88", "important");
+  });
 }
 
-// Run multiple times to beat SlopIt rendering
-injectStyles();
-document.addEventListener("DOMContentLoaded", injectStyles);
-window.addEventListener("load", injectStyles);
-setTimeout(injectStyles, 500);
-setTimeout(injectStyles, 1500);
+// Run constantly to beat SlopIt rendering
+setInterval(forceDark, 300);
